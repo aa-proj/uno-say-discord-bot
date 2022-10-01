@@ -65,7 +65,7 @@ const generateJELLYImage = async (text) => {
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
     await page.goto("http://localhost:3000/internal/index.html?text=" + text);
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(5000);
     const uuid = uuidv4()
     await page.screenshot({ path: `./img/${uuid}.png` });
     await browser.close();
