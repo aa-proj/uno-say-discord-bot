@@ -20,7 +20,11 @@
     <canvas id="unchi" width="1920" height="1080" style="display:none"></canvas>
     <canvas id="result-canvas" width="1920" height="1080" style="width:1280px; height:720px; margin:0; padding:0"></canvas>
 
+    <p style="font-size:0px" id="pre-load-text"></p>
+
     <script>
+        const searchParams = new URLSearchParams(window.location.search)
+        document.getElementById("pre-load-text").value = searchParams.get('text')
         const render = function () {
             const backboard = document.getElementById("unchi")
             const ctx = backboard.getContext("2d");
@@ -28,7 +32,6 @@
             ctx.textAlign = "center"
             ctx.fill = "black"
             ctx.font = "135px 'Noto Sans JP'";
-            const searchParams = new URLSearchParams(window.location.search)
             ctx.fillText(searchParams.get('text'), 850, 120)
             var canvas = fx.canvas();
             var texture = canvas.texture(backboard);
