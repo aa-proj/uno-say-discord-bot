@@ -61,7 +61,7 @@ client.on('interactionCreate', async interaction => {
 client.login(process.env.DISCORD_TOKEN);
 
 const generateJELLYImage = async (text) => {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'],  headless: true.valueOf });
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'],  headless: true });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
     await page.goto("http://localhost:3000/internal/index.html?text=" + text);
