@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head prefix="og: https://ogp.me/ns#">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./font.css" rel="stylesheet">
+    <title>じぇりーさんにしゃべらせるやつv1</title>
+
+    <meta property="og:url" content="https://kusokora.kokoa.dev/index.html" />
+    <meta property="og:title" content=" じぇりーさんにしゃべらせるやつ" />
+    <meta property="og:description" content=" じぇりーさんにしゃべらせるやつ" />
+    <meta property="og:site_name" content="じぇりーさんにしゃべらせるやつ" />
+    <meta property="og:image" content=" https://kusokora.kokoa.dev/img/ogp.png" />
+</head>
+
+<body style="margin:0; padding:0">
+    <script src="./js/glfx.js"></script>
+    <canvas id="unchi" width="1920" height="1080" style="display:none"></canvas>
+    <canvas id="result-canvas" width="1920" height="1080" style="width:1280px; height:720px; margin:0; padding:0"></canvas>
+
+    <script>
+        const render = function () {
+            const backboard = document.getElementById("unchi")
+            const ctx = backboard.getContext("2d");
+            ctx.clearRect(0, 0, backboard.width, backboard.height);
+            ctx.textAlign = "center"
+            ctx.fill = "black"
+            ctx.font = "135px 'Noto Sans JP'";
+            const searchParams = new URLSearchParams(window.location.search)
+            ctx.fillText(searchParams.get('text'), 850, 120)
+            var canvas = fx.canvas();
+            var texture = canvas.texture(backboard);
+            const w = 1700
+            const h = 140
+            const offsetx = 0
+            const offsety = -10
+            canvas.draw(texture).perspective([offsetx, offsety, offsetx, h, w, offsety, w, h], [251, 723, 221, 855, 1709, 719, 1750, 850]).update();
+
+            const dataurl = canvas.toDataURL('image/png');
+
+            const result = document.getElementById("result-canvas")
+            const ctx2 = result.getContext("2d");
+
+            /// ctx2.clearRect(0, 0, result.width, result.height);
+
+            const chara2 = new Image();
+            chara2.src = "./img/1.jpg";  // 画像のURLを指定
+            chara2.onload = () => {
+                ctx2.drawImage(chara2, 0, 0);
+                const img = new Image()
+                img.src = dataurl
+                img.onload = () => {
+                    ctx2.drawImage(img, 0, 0);
+                }
+                const hanko = new Image()
+                hanko.src = "./img/hanko.png"
+                hanko.onload = () => {
+                    const hw = 120
+                    ctx2.drawImage(hanko, 0, 0, 400, 400, 1920 - hw, 1080 - hw, hw, hw)
+                }
+            }
+        };
+
+        // window.onload = render
+        setTimeout(() => {
+            render()
+            setTimeout(() => {
+                render()
+            },200)
+        }, 100);
+
+    </script>
+</body>
+
+</html>
