@@ -64,6 +64,7 @@ const generateJELLYImage = async (text) => {
     const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'],  headless: true });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
+    await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
     await page.goto("http://localhost:3000/internal/index.html?text=" + text);
     await page.waitForTimeout(2600);
     const uuid = uuidv4()
