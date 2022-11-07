@@ -2,9 +2,10 @@
   "name": "jelly-say-discord-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.mjs"
   },
   "repository": {
     "type": "git",

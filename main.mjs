@@ -49,7 +49,7 @@ client.on('guildCreate', async (guild) => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
-    if (interaction.commandName === 'jellysay') {
+    if (interaction.commandName === 'unosay') {
         const text = interaction.options.get("text")?.value
         const reply = await interaction.reply("generating...")
         const uuid = await generateJELLYImage(text)
