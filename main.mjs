@@ -130,7 +130,7 @@ const generateJELLYImage = async (text, img) => {
     await page.setViewport({ width: 1280, height: 720 });
     await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
     await page.goto(`http://localhost:3000/internal/index.html?text=${text}&img=${img}`, { waitUntil: 'load' });
-    await page.waitForTimeout(2600);
+    await page.waitForTimeout(600);
     const uuid = uuidv4()
     await page.screenshot({ path: `./img/${uuid}.png` });
     await browser.close();
