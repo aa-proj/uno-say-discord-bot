@@ -8,7 +8,7 @@ app.use("/image", express.static('img'));
 
 app.listen(3000, () => console.log("express ok"))
 
-const commands = ["uno", "uno2", "asai1", "asai2", "asai3", "ota1"]
+const commandsList = ["uno", "uno2", "asai1", "asai2", "asai3", "ota1"]
 
 const commands = [
     {
@@ -111,7 +111,7 @@ client.on('guildCreate', async (guild) => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
-    const command = commands.filter(c => c === interaction.commandName.replace("say",""))
+    const command = commandsList.filter(c => c === interaction.commandName.replace("say",""))
 
     if (command.length !== 0) {
         const text = interaction.options.get("text")?.value
