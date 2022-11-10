@@ -13,7 +13,7 @@ const commandsList = ["uno", "uno2", "asai1", "asai2", "asai3", "ota1"]
 const commands = [
     {
         name: 'sayuno',
-        description: 'Unoがしゃべります',
+        description: 'Uno電車',
         options: [
             {
                 name: "text",
@@ -25,7 +25,7 @@ const commands = [
     },
     {
         name: 'sayuno2',
-        description: 'Unoがしゃべります',
+        description: 'Uno土下座',
         options: [
             {
                 name: "text",
@@ -37,7 +37,7 @@ const commands = [
     },
     {
         name: 'sayasai1',
-        description: 'Asaiがしゃべります',
+        description: 'Asai真顔',
         options: [
             {
                 name: "text",
@@ -49,7 +49,7 @@ const commands = [
     },
     {
         name: 'sayasai2',
-        description: 'Asaiがしゃべります',
+        description: 'Asaiマスクメガネ',
         options: [
             {
                 name: "text",
@@ -61,7 +61,7 @@ const commands = [
     },
     {
         name: 'sayasai3',
-        description: 'Asaiがしゃべります',
+        description: 'Asai発狂',
         options: [
             {
                 name: "text",
@@ -72,8 +72,8 @@ const commands = [
         ]
     },
     {
-        name: 'sayota',
-        description: 'Otaがしゃべります',
+        name: 'sayota1',
+        description: 'Ota真顔うまい棒',
         options: [
             {
                 name: "text",
