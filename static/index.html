@@ -12,7 +12,7 @@
 
 <body style="margin:0; padding:0">
     <div>
-        <img src="./img/1.jpg" width="1280" height="720" style="width:1280px; height:720px; margin:0; padding:0"></canvas>
+        <img id="img" src="" width="1280" height="720" style="width:1280px; height:720px; margin:0; padding:0"></canvas>
         <p style="font-family: 'Noto Sans JP';" id="text"></p>
     </div>
 
@@ -36,10 +36,12 @@
 
     <script>
         const searchParams = new URLSearchParams(window.location.search)
+        const imgElement = document.getElementById("img")
         window.onload = () => {
             document.getElementById("text").innerText = searchParams.get('text')
+            imgElement.src = `./img/${searchParams.get('img')}.png`
             if(searchParams.get('text').length > 20) {
-                document.getElementById("text").style.fontSize = `${100 / searchParams.get('text').length}vw`
+                document.getElementById("text").style.fontSize = `${100 / (searchParams.get('text').length + 2)}vw`
             }
         }
 

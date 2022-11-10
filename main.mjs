@@ -8,10 +8,72 @@ app.use("/image", express.static('img'));
 
 app.listen(3000, () => console.log("express ok"))
 
+const commands = ["uno", "uno2", "asai1", "asai2", "asai3", "ota1"]
+
 const commands = [
     {
-        name: 'unosay',
+        name: 'sayuno',
         description: 'Unoがしゃべります',
+        options: [
+            {
+                name: "text",
+                required: true,
+                description: "テキスト",
+                type: 3
+            }
+        ]
+    },
+    {
+        name: 'sayuno2',
+        description: 'Unoがしゃべります',
+        options: [
+            {
+                name: "text",
+                required: true,
+                description: "テキスト",
+                type: 3
+            }
+        ]
+    },
+    {
+        name: 'sayasai1',
+        description: 'Asaiがしゃべります',
+        options: [
+            {
+                name: "text",
+                required: true,
+                description: "テキスト",
+                type: 3
+            }
+        ]
+    },
+    {
+        name: 'sayasai2',
+        description: 'Asaiがしゃべります',
+        options: [
+            {
+                name: "text",
+                required: true,
+                description: "テキスト",
+                type: 3
+            }
+        ]
+    },
+    {
+        name: 'sayasai3',
+        description: 'Asaiがしゃべります',
+        options: [
+            {
+                name: "text",
+                required: true,
+                description: "テキスト",
+                type: 3
+            }
+        ]
+    },
+    {
+        name: 'sayota',
+        description: 'Otaがしゃべります',
         options: [
             {
                 name: "text",
@@ -49,10 +111,12 @@ client.on('guildCreate', async (guild) => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
-    if (interaction.commandName === 'unosay') {
+    const command = commands.filter(c => c === interaction.commandName.replace("say",""))
+
+    if (command.length !== 0) {
         const text = interaction.options.get("text")?.value
         const reply = await interaction.reply("generating...")
-        const uuid = await generateJELLYImage(text)
+        const uuid = await generateJELLYImage(text, command[0])
         await interaction.channel.send(`https://${process.env.HOST}/image/${uuid}.png`)
         await interaction.deleteReply()
     }
@@ -60,12 +124,12 @@ client.on('interactionCreate', async interaction => {
 
 client.login(process.env.DISCORD_TOKEN);
 
-const generateJELLYImage = async (text) => {
+const generateJELLYImage = async (text, img) => {
     const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: true });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
     await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
-    await page.goto("http://localhost:3000/internal/index.html?text=" + text, { waitUntil: 'load' });
+    await page.goto(`http://localhost:3000/internal/index.html?text=${text}&img=${img}`, { waitUntil: 'load' });
     await page.waitForTimeout(2600);
     const uuid = uuidv4()
     await page.screenshot({ path: `./img/${uuid}.png` });
